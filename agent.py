@@ -1,4 +1,4 @@
-#import the dependencies 
+#import the LIBRARIES 
 from  openai import OpenAI 
 from agents import Runner,Agent
 from composio import Composio
@@ -7,7 +7,16 @@ from composio_client import UserAuth
 from dotenv import load_dotenv
 import os
 load_dotenv(override=True)
+from supabase import create_client,Client
+import supabase
 
+# SUPABASE VARIABLEs
+url = os.getenv('SUPABASE_URL')
+anon_key  = os.getenv('SUPABASE_ANON_KEY')
+
+client = create_client(url,anon_key)
+
+#COMPOSIO VARIABLEs
 composio_api_key = os.getenv('COMPOSIO_API_KEY')
 openai_api_key   = os.getenv('OPENAI_API_KEY')
 provider = OpenAIAgentsProvider()
@@ -53,9 +62,12 @@ def query (q):
 while True:
 
     prompt = input('YOU:')
-    if prompt == 'leave':
+    if prompt=='leave0':
             break
-    print(f'AI:{query(prompt)})')
+    answer = query(prompt)
+    print(f'AI: {answer})')
+    
+    
 
     
     
