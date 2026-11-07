@@ -46,8 +46,16 @@ def query (q):
     response = Runner.run_sync(starting_agent=agent,
                input=q)
 
-    print( response.final_output)
+    return ( response.final_output)
 
 
 
-query('can you schedule two events of 30 mins tomorrow at time : 8AM and 4PM')
+while True:
+
+    prompt = input('YOU:')
+    if prompt == 'leave':
+            break
+    print(f'AI:{query(prompt)})')
+
+    
+    
