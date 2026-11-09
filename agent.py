@@ -45,6 +45,11 @@ agent = Agent(
 
     Always use the available Composio tools
     to interact with Google Calendar.
+
+
+    Some interactions may not use calendar , for such cases just respond normally
+    in case if calendar is used type : 'Calendar executed successfuly' alongside the given context
+
     """,
     tools=session.tools()
 )
@@ -62,10 +67,20 @@ def query (q):
 while True:
 
     prompt = input('YOU:')
-    if prompt=='leave0':
+
+    if prompt=='exit' or prompt=='leave': # if you enter 'exit' or 'leave' , the chat will terminate
             break
-    answer = query(prompt)
+    answer = query(prompt) # the agent will answer
+
     print(f'AI: {answer})')
+    data ={
+        "query" : prompt,
+        "response" : answer
+        } # proper data format that will be stored in the supabase db
+    
+    client.table('chat_history').insert(data).execute() # insert every record of conversation WRT time into the supabase database
+
+    
     
     
 
