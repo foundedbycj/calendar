@@ -26,9 +26,20 @@ composio = Composio(provider=provider,api_key=composio_api_key)
 session = composio.create( #make session of composio
     user_id='CJ',
     toolkits=['googlecalendar']
-
-
 )
+
+
+def get_context():
+
+     context = (client
+                .table('history')
+                .select('query ,response')
+                .execute())
+     return context
+
+
+
+
 
 
 agent = Agent(
@@ -61,7 +72,6 @@ def query (q):
                input=q)
 
     return ( response.final_output)
-
 
 
 while True:
