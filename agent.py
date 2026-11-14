@@ -23,7 +23,7 @@ provider = OpenAIAgentsProvider()
 
 composio = Composio(provider=provider,api_key=composio_api_key)
 
-session = composio.create( #make session of composio
+session = composio.create( #make session of composiohi
     user_id='CJ',
     toolkits=['googlecalendar']
 )
@@ -32,7 +32,7 @@ session = composio.create( #make session of composio
 def get_context():
 
      context = (client
-                .table('history')
+                .table('chat_history')
                 .select('query ,response')
                 .execute())
      return context
@@ -54,6 +54,7 @@ agent = Agent(
     - Update existing events.
     - Delete events only after user confirmation.
     - For relative messages and for context use the latest context from {context}
+    - Follow up messages should use {context} to prevent dependency on just one form of query and using past queries to make responses too(of the last 2 rows ideally )
     Always use the available Composio tools
     to interact with Google Calendar.
 
