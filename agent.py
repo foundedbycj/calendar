@@ -23,13 +23,13 @@ provider = OpenAIAgentsProvider()
 
 composio = Composio(provider=provider,api_key=composio_api_key)
 
-session = composio.create( #make session of composiohi
+session = composio.create( #make session of composio
     user_id='CJ',
     toolkits=['googlecalendar']
 )
 
 
-def get_context():
+def get_context(): # making a function to retrieve previous context from supabase database
 
      context = (client
                 .table('chat_history')
@@ -38,7 +38,7 @@ def get_context():
      return context
 
 
-context = get_context()
+context = get_context() # calling the function to retrieve context
 
 
 
