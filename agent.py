@@ -38,13 +38,13 @@ def get_context():
      return context
 
 
-
+context = get_context()
 
 
 
 agent = Agent(
     name="Calendar Assistant",
-    instructions="""
+    instructions=f"""
     You are a helpful Google Calendar assistant.
 
     You can:
@@ -53,11 +53,11 @@ agent = Agent(
     - Create calendar events.
     - Update existing events.
     - Delete events only after user confirmation.
-
+    - For relative messages and for context use the latest context from {context}
     Always use the available Composio tools
     to interact with Google Calendar.
 
-
+    always
     Some interactions may not use calendar , for such cases just respond normally
     in case if calendar is used type : 'Calendar executed successfuly' alongside the given context
 
